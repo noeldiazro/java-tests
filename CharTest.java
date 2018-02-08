@@ -32,4 +32,11 @@ public class CharTest extends TestCase {
 	char backslash = '\\';
 	assertEquals('"', '\"');
     }
+
+    public void testWhitespace() {
+	assertTrue(Character.isWhitespace('\n'));
+	assertTrue(Character.isWhitespace('\t'));
+	assertTrue(Character.isWhitespace(' '));
+	assertFalse(Character.isWhitespace('A'));
+    }
 }
