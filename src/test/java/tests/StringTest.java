@@ -1,5 +1,7 @@
 package tests;
 
+import java.util.Arrays;
+import java.util.List;
 import junit.framework.TestCase;
 
 public class StringTest extends TestCase {
@@ -28,5 +30,20 @@ public class StringTest extends TestCase {
 	}
 	assertEquals(3, total);
     }
-	
+
+    public void testIterate() {
+	String text = "ABCDE";
+	int i = 0;
+	while (i < text.length()) {
+	    text.charAt(i);
+	    i++;
+	}
+    }
+
+    public void testSplitEmptyString() {
+	String sentence = "";
+	List<String> words = Arrays.asList(sentence.split(" "));
+	assertEquals(1, words.size());
+	assertEquals("", words.get(0));
+    }
 }
