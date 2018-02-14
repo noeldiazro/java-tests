@@ -29,4 +29,29 @@ public class MyStringTest extends TestCase {
 	text = new MyString("ABCABC");
 	assertEquals(2, text.countChar('B'));
     }
+
+    public void testEmptyCharIsPalindrome() {
+	text = new MyString("");
+	assertTrue(text.isPalindrome());
+    }
+
+    public void testOneCharacterIsPalindrome() {
+	text = new MyString("A");
+	assertTrue(text.isPalindrome());
+    }
+
+    public void testTwoDifferentCharactersAreNotPalindrome() {
+	text = new MyString("AB");
+	assertFalse(text.isPalindrome());
+    }
+
+    public void testTwoEqualCharactersArePalindrome() {
+	text = new MyString("AA");
+	assertTrue(text.isPalindrome());
+    }
+
+    public void testFourCharactersEqualExtremesButDifferentMiddleCharsAreNotPalindrome() {
+	text = new MyString("ABCA");
+	assertFalse(text.isPalindrome());
+    }
 }
