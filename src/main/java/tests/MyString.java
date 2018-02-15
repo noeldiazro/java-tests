@@ -73,5 +73,35 @@ class MyString implements Comparable<MyString> {
 
     private MyString substring(int beginIndex, int endIndex) {
 	return new MyString(text.substring(beginIndex, endIndex));
-    }    
+    }
+
+    @Override public boolean equals(Object that) {
+	return this.text.equals(((MyString)that).text);
+    }
+
+    MyString concat(MyString that) {
+	return new MyString(this.text + that.text);
+    }
+
+    MyString join(MyString... elements) {
+	if (elements.length == 0) {
+	    return new MyString("");
+	}
+	if (elements.length == 1) {
+	    return first(elements);
+	}
+	return first(elements).concat(this).concat(join(tail(elements)));
+    }
+
+    private MyString first(MyString[] elements) {
+	return elements[0];
+    }
+
+    private MyString[] tail(MyString[] elements) {
+	MyString[] result = new MyString[elements.length - 1];
+	for (int i = 1; i < elements.length; i++) {
+	    result[i-1] = elements[i];
+	}
+	return result;
+    }
 }

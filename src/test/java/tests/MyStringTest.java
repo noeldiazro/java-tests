@@ -78,4 +78,46 @@ public class MyStringTest extends TestCase {
     private void assertTrimming(MyString original, MyString expected) {
 	assertEquals(0, original.endTrim().compareTo(expected));
     }
+
+    public void testEquality() {
+	assertEquals(new MyString("A"), new MyString("A"));
+	assertFalse(new MyString("A").equals(new MyString("B")));
+    }
+
+    public void testConcat() {
+	assertEquals(new MyString("AB"), new MyString("A").concat(new MyString("B")));
+    }
+
+    public void testJoinEmptySeparatorNoStrings() {
+	MyString separator = new MyString("");
+	assertEquals(new MyString(""), separator.join());
+    }
+
+    public void testJoinCommaSeparatorNoStrings() {
+	MyString separator = new MyString(",");
+	assertEquals(new MyString(""), separator.join());
+    }
+
+    public void testJoinCommaSeparatorOneString() {
+	MyString separator = new MyString(",");
+	assertEquals(new MyString("A"), separator.join(new MyString("A")));
+	assertEquals(new MyString("B"), separator.join(new MyString("B")));
+    }
+
+    public void testJoinCommaSeparatorSeveralStrings() {
+	MyString separator = new MyString(",");
+	assertEquals(new MyString("A,B"), separator.join(new MyString("A"), new MyString("B")));
+	assertEquals(new MyString("A,B,C"), separator.join(new MyString("A"),
+							   new MyString("B"),
+							   new MyString("C")));
+    }
+
+    public void testArbitraryJoins() {
+	assertEquals(new MyString("A--AA--AAA--AAAA--AAAAA"),
+		     new MyString("--").join(new MyString("A"),
+					     new MyString("AA"),
+					     new MyString("AAA"),
+					     new MyString("AAAA"),
+					     new MyString("AAAAA")));
+    }
 }
