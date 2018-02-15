@@ -46,4 +46,8 @@ public class StringTest extends TestCase {
 	assertEquals(1, words.size());
 	assertEquals("", words.get(0));
     }
+
+    public void testCompareEmptyString() {
+	assertEquals(new String(""), new String(""));
+    }
 }

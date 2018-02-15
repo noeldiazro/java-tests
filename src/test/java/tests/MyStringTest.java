@@ -54,4 +54,28 @@ public class MyStringTest extends TestCase {
 	text = new MyString("ABCA");
 	assertFalse(text.isPalindrome());
     }
+
+    public void testCompare() {
+	assertEquals(0, new MyString("").compareTo(new MyString("")));
+    }
+
+    public void testEndTrimEmptyString() {
+	assertTrimming(new MyString(""), new MyString(""));
+    }
+
+    public void testEndTrimStringNotWhitespaceEnding() {
+	assertTrimming(new MyString("A"), new MyString("A"));
+    }
+
+    public void testEndTrimStringWithAWhitespaceEnding() {
+	assertTrimming(new MyString("A "), new MyString("A"));
+    }
+
+    public void testArbitraryTrimming() {
+	assertTrimming(new MyString("  AB CDE   "), new MyString("  AB CDE"));
+    }
+    
+    private void assertTrimming(MyString original, MyString expected) {
+	assertEquals(0, original.endTrim().compareTo(expected));
+    }
 }

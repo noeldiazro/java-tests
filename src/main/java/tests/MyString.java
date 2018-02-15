@@ -1,6 +1,6 @@
 package tests;
 
-class MyString {
+class MyString implements Comparable<MyString> {
     private String text;
     
     MyString(String text) {
@@ -11,7 +11,7 @@ class MyString {
 	if (isEmpty()) {
 	    return 0;
 	}
-	return (startsWith(searchFor) ? 1 : 0) + trimFirstCharacter().countChar(searchFor);
+	return (startsWith(searchFor) ? 1 : 0) + removeFirstCharacter().countChar(searchFor);
     }
 
     private boolean isEmpty() {
@@ -22,7 +22,7 @@ class MyString {
 	return text.charAt(0) == searchFor;
     }
 
-    private MyString trimFirstCharacter() {
+    private MyString removeFirstCharacter() {
 	return substring(1);
     }
     
@@ -34,7 +34,7 @@ class MyString {
 	if (isEmptyOrOneCharacter()) {
 	    return true;
 	}
-	return firstCharacterEqualsLastOne() && trimExtremes().isPalindrome();
+	return firstCharacterEqualsLastOne() && removeExtremes().isPalindrome();
     }
 
     private boolean isEmptyOrOneCharacter() {
@@ -45,11 +45,33 @@ class MyString {
 	return text.charAt(0) == text.charAt(text.length() - 1);
     }
 
-    private MyString trimExtremes() {
+    private MyString removeExtremes() {
 	return substring(1, text.length() - 1);
     }
     
+    MyString endTrim() {
+	if (isEmpty()) {
+	    return this;
+	}
+	if (!lastCharacterIsWhitespace()) {
+	    return this;
+	}
+	return removeLastCharacter().endTrim();
+    }
+
+    public int compareTo(MyString that) {
+	return this.text.compareTo(that.text);
+    }
+
+    private boolean lastCharacterIsWhitespace() {
+	return Character.isWhitespace(text.charAt(text.length()-1));
+    }
+    
+    private MyString removeLastCharacter() {
+	return substring(0, text.length() - 1);
+    }
+
     private MyString substring(int beginIndex, int endIndex) {
 	return new MyString(text.substring(beginIndex, endIndex));
-    }
+    }    
 }
