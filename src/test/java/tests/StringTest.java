@@ -50,4 +50,17 @@ public class StringTest extends TestCase {
     public void testCompareEmptyString() {
 	assertEquals(new String(""), new String(""));
     }
+
+    public void testStringEquality() {
+	String s1 = "ABCD";
+	String s2 = "ABCD";
+
+	String s3 = "AB";
+	s3 += "CD";
+
+	assertEquals(s1, s2);
+	assertTrue(s1 == s2);
+	assertEquals(s1, s3);
+	assertFalse(s1 == s3);
+    }
 }
